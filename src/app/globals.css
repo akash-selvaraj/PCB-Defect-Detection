@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.cursor-magnifier {
+    cursor: zoom-in;
+  }
+  .poppins-thin {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  .poppins-extralight {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .poppins-semibold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .poppins-extrabold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .poppins-black {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .poppins-thin-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  .poppins-extralight-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: italic;
+  }
+  
+  .poppins-light-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .poppins-regular-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .poppins-medium-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  .poppins-semibold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  .poppins-bold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .poppins-extrabold-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+  }
+  
+  .poppins-black-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+  /* Add these classes directly to your component or customize as needed */
+
+/* General container settings for responsive behavior */
+.container {
+  @apply mx-auto px-4 sm:px-6 md:px-8;
+}
+
+/* Navbar */
+nav {
+  @apply flex flex-wrap justify-between items-center gap-4 sm:gap-6;
+}
+
+nav .container {
+  @apply flex flex-col sm:flex-row justify-between items-center gap-y-2;
+}
+
+nav h1 {
+  @apply text-lg sm:text-xl md:text-2xl font-bold;
+}
+
+/* Input Slider */
+input[type="range"] {
+  @apply w-full sm:w-auto;
+}
+
+/* Buttons */
+button {
+  @apply w-full sm:w-auto px-4 py-2 rounded text-center transition-all;
+}
+
+/* Upload Section */
+.upload-section {
+  @apply w-full flex flex-col items-center space-y-4 md:space-y-6;
+}
+
+.upload-section input {
+  @apply w-full sm:max-w-md text-sm p-2 border rounded;
+}
+
+/* Table */
+table {
+  @apply table-auto w-full text-sm text-center border rounded overflow-hidden;
+}
+
+thead th {
+  @apply px-3 py-2 sm:px-4 sm:py-3 uppercase font-semibold;
+}
+
+tbody tr {
+  @apply border-t hover:bg-gray-100;
+}
+
+/* Image Display */
+img {
+  @apply max-w-full h-auto object-contain;
+}
+
+.image-container {
+  @apply relative flex justify-center mt-4 w-full;
+}
+
+/* Bounding Box */
+.bounding-box {
+  @apply absolute border-4;
+}
+
+/* Magnifier */
+.magnifier {
+  @apply absolute z-10 border border-gray-400 rounded-full overflow-hidden;
+}
+
+/* Defects Table */
+.defects-table {
+  @apply mt-8 max-w-full overflow-x-auto;
+}
+
+.defects-table table {
+  @apply w-full min-w-[500px]; /* Ensure table isn't squished */
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] {
+  @apply bg-gray-900 text-gray-200;
+}
+
+/* Responsive Adjustments */
+@screen sm {
+  .container {
+    @apply px-2;
+  }
+  nav h1 {
+    @apply text-lg font-medium;
+  }
+  .upload-section {
+    @apply space-y-3;
+  }
+}
+
+@screen md {
+  nav h1 {
+    @apply text-2xl;
+  }
+  .upload-section {
+    @apply space-y-4;
+  }
+}
+
+@screen lg {
+  .image-container {
+    @apply w-3/4;
+  }
+  .upload-section {
+    @apply space-y-6;
+  }
+}
