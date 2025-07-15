@@ -6,7 +6,7 @@
 
 ---
 
-## 📸 Final Product
+## 📸 Architecture
 
 🚀 <img width="1920" height="1080" alt="Demo" src="https://github.com/user-attachments/assets/e4f7bb9b-dc06-4f35-b272-4e23d060cf12" />
 
@@ -29,7 +29,7 @@ This system detects the following defect types:
 
 ## 🖼️ Interface Features
 
-![UI Overview](./f701db5d-97d8-43dc-aa74-252a5a21b0e6.png)
+<img width="1920" height="1080" alt="Demo" src="https://github.com/user-attachments/assets/e4f7bb9b-dc06-4f35-b272-4e23d060cf12" />
 
 * 🖼️ **Image Upload** – Upload your PCB image
 * 🧠 **Detect Button** – Trigger model inference
