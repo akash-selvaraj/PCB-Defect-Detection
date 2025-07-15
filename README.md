@@ -51,7 +51,6 @@ This system detects the following defect types:
 
 ## 🔧 System Architecture
 
-![System Architecture]
 <img width="4988" height="1652" alt="diagram (2)" src="https://github.com/user-attachments/assets/2ab4f8b5-8001-488a-9735-f14626f6e3af" />
 
 
