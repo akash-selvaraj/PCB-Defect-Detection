@@ -1,203 +1,150 @@
-# 🧠 PCB Defect Detection Web Application
+# ⚡ PCB Perfect – Web-Based PCB Defect Detection System
 
-A full-stack web application for detecting **six types of PCB defects** using a deep learning model (Detectron2). The system enables users to upload PCB images through a modern Next.js interface, which communicates with a Python backend inference service to return annotated predictions. It includes powerful features like **zoom magnification** and **light/dark mode toggle** for enhanced inspection.
+**PCB Perfect** is a full-stack, AI-powered web application designed to detect six common types of PCB (Printed Circuit Board) defects. It features a fast, user-friendly interface and a powerful Detectron2 model served via a Python backend.
 
----
-
-## 📌 Features
-
-* ✅ Upload and analyze PCB images
-* ✅ Automatically detect **6 defect classes**:
-
-  * `missing_hole`
-  * `mouse_bite`
-  * `open_circuit`
-  * `short`
-  * `spur`
-  * `spurious_copper`
-* ✅ Model returns annotated images highlighting the defect regions
-* 🔍 Built-in **magnifier tool** for zooming into PCB areas
-* 🌗 Toggle between **Light and Dark modes** for user comfort
-* ⚡ Fast REST API integration between frontend and backend
+> Upload → Detect → Zoom → Filter → Explore with Ease.
 
 ---
 
-## 🖼️ Demo
+## 📸 Final Product
 
-> 📽️ Add screenshots or link to a demo (e.g., deployed app or video walkthrough).
-
----
-
-## 🏗️ System Architecture
-
-The application has two main components:
-
-### 🟦 Frontend: Next.js
-
-* Receives user image uploads
-* Sends REST API requests
-* Displays annotated images
-* Provides UI features (theme switch, magnifier)
-
-### 🟩 Backend: Python + Flask (or FastAPI)
-
-* Receives images from frontend
-* Loads a pre-trained Detectron2 model
-* Performs inference
-* Sends back predictions and image overlays
-
-![Architecture Diagram](diagram.png)
+🚀 *\[<img width="1920" height="1080" alt="Demo" src="https://github.com/user-attachments/assets/e4f7bb9b-dc06-4f35-b272-4e23d060cf12" />]*
 
 ---
 
-## ⚙️ Technologies Used
+## 🧠 Supported Defect Classes
 
-### 🖥️ Frontend
+This system detects the following defect types:
 
-* [Next.js](https://nextjs.org/)
-* TypeScript
-* Tailwind CSS
-* PostCSS
-* ESLint
-* Inbuilt zoom tool
-* Light/Dark mode toggle
+| Defect Class      | Description                           |
+| ----------------- | ------------------------------------- |
+| `missing_hole`    | Expected hole is absent               |
+| `mouse_bite`      | Irregular copper notches              |
+| `open_circuit`    | Broken trace disrupting connectivity  |
+| `short`           | Unwanted electrical connection        |
+| `spur`            | Extra trace branching off main path   |
+| `spurious_copper` | Random or unintended copper fragments |
 
-### ⚙️ Backend
+---
 
+## 🖼️ Interface Features
+
+![UI Overview](./f701db5d-97d8-43dc-aa74-252a5a21b0e6.png)
+
+* 🖼️ **Image Upload** – Upload your PCB image
+* 🧠 **Detect Button** – Trigger model inference
+* 🎚️ **Confidence Score Slider** – Filter predictions by confidence (e.g., show only >60%)
+* 🔍 **Magnifier** – Zoom into specific PCB areas
+* 🌙 **Dark/Light Mode** – Toggle interface theme
+
+---
+
+## 📂 Dataset Used
+
+**Source**: [Roboflow PCB Dataset](https://universe.roboflow.com/project-5o3tr/pcb-wgcpv/dataset/1)
+
+* **Total Images**: 1386
+
+  * Train: 969 (70%)
+  * Validation: 277 (20%)
+  * Test: 140 (10%)
+
+**Preprocessing Steps**:
+
+* ✅ Auto-Orient
+* 🖼️ Resize: 640×640 (stretch)
+* 🚫 No augmentations applied
+
+---
+
+## 🔧 System Architecture
+
+![System Architecture](./diagram.png)
+
+### Frontend – Next.js
+
+* Uploads files and makes API calls
+* Renders bounding boxes and overlays
+* Offers theme toggle, magnifier, and filtering UI
+
+### Backend – FastAPI (or Flask) + Python
+
+* Loads Detectron2 model using `.pth` and `.yaml`
+* Accepts image input and returns JSON + annotated image
+
+---
+
+## 🧰 Technologies Used
+
+* **Frontend**: Next.js, Tailwind CSS, TypeScript, PostCSS
+* **Backend**: Python 3.7, FastAPI or Flask, PyTorch, Detectron2
+* **Deployment**: REST APIs, static asset serving
+* **Utilities**: ESLint, modern config management
+
+---
+
+## 💻 Installation & Usage
+
+### ✅ Requirements
+
+* Linux OS (Detectron2 is Linux-specific)
 * Python 3.7
-* Flask or FastAPI
-* Detectron2
-* PyTorch
-* YAML for model configuration
+* CUDA-compatible GPU for inference speed
 
 ---
 
-## 🛠️ System Requirements
-
-* ✅ **Linux OS is mandatory** (Detectron2 does not support Windows reliably)
-* ✅ **Python 3.7** or compatible environment
-* ⚠️ `requirements_cpu.txt` is provided but **may not work** (Detectron2 prefers CUDA-enabled environments)
-* 🧠 Pre-trained model (`model_final.pth`) must be placed in the specified location
-
----
-
-## 🐍 Backend Setup (Inference Service)
-
-### 1. Clone the repository & enter backend directory:
+### 🔹 Backend Setup
 
 ```bash
 cd backend/
-```
-
-### 2. Create a virtual environment and activate it:
-
-```bash
 python3.7 -m venv venv
 source venv/bin/activate
-```
-
-### 3. Install dependencies (preferably use GPU):
-
-```bash
 pip install -r requirements.txt
 ```
 
-If you're on a CPU-only machine, try:
+Optional CPU-only fallback (may not always work):
 
 ```bash
-pip install -r requirements_cpu.txt  # ⚠️ May not work reliably
+pip install -r requirements_cpu.txt
 ```
 
-### 4. Install Detectron2:
+Install Detectron2:
 
 ```bash
 python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
 ```
 
-### 5. Start the backend API service:
+Start backend server:
 
 ```bash
 python app.py
 ```
 
-The backend will be available at: `http://localhost:5000`
+**API URL**: `http://localhost:5000`
 
 ---
 
-## 🌐 Frontend Setup (Next.js)
-
-### 1. Navigate to frontend folder:
+### 🔸 Frontend Setup
 
 ```bash
 cd frontend/
-```
-
-### 2. Install dependencies:
-
-```bash
 npm install
-```
-
-### 3. Run the frontend app:
-
-```bash
 npm run dev
 ```
 
-App will be available at: `http://localhost:3000`
+Open in browser: `http://localhost:3000`
 
 ---
 
-## 📂 Directory Structure
+## 📡 API Details
 
-```
-.
-├── backend/
-│   ├── app.py
-│   ├── model_final.pth
-│   ├── YAML Configs/
-│   ├── requirements.txt
-│   └── requirements_cpu.txt
-│
-├── frontend/
-│   ├── api.ts
-│   ├── layout.tsx
-│   ├── page.tsx
-│   ├── globals.css
-│   ├── fonts/
-│   ├── next.config.ts
-│   ├── tailwind.config.ts
-│   ├── postcss.config.mjs
-│   ├── tsconfig.json
-│   ├── .eslintrc.json
-│   └── public/
-│
-├── diagram.png
-└── README.md
-```
+### Endpoint
 
----
+`POST /predict`
+**Content-Type**: `multipart/form-data`
+**Field**: `file` (image input)
 
-## 📦 Model
-
-* **File:** `model_final.pth`
-* **Location:** `backend/`
-* **Config:** YAML files defining preprocessing and model architecture
-
----
-
-## 📡 API Endpoint
-
-```http
-POST /predict
-Content-Type: multipart/form-data
-```
-
-Form Data:
-
-* `file`: image file
-
-**Response**: JSON with defect predictions + annotated image
+### Sample Response
 
 ```json
 {
@@ -205,24 +152,36 @@ Form Data:
     {"class": "short", "score": 0.91, "box": [34, 56, 120, 160]},
     {"class": "spur", "score": 0.88, "box": [200, 100, 300, 180]}
   ],
-  "image_url": "http://localhost:5000/static/annotated_image.png"
+  "annotated_image_url": "http://localhost:5000/static/image_annotated.png"
 }
 ```
 
 ---
 
-## ❗ Notes
+## 🧠 Model Artifacts
 
-* If Detectron2 fails to build, ensure:
-
-  * Linux system
-  * PyTorch version matches CUDA
-  * C++ build tools installed (e.g., `build-essential` on Ubuntu)
+| File              | Purpose                                |
+| ----------------- | -------------------------------------- |
+| `model_final.pth` | Pre-trained weights for inference      |
+| Config YAML       | Network architecture & hyperparameters |
 
 ---
 
 ## 📝 License
 
-This project is released under the MIT License.
+This project is under the **MIT License**.
+Free to use, modify, and distribute.
 
 ---
+
+## 🙋‍♂️ Contributing
+
+Pull requests are welcome!
+Please keep your code clean and well-tested.
+
+---
+
+## 👏 Acknowledgments
+
+* [Roboflow](https://universe.roboflow.com/) – Dataset provider
+* [Facebook Research](https://github.com/facebookresearch/detectron2) – Detectron2 framework
