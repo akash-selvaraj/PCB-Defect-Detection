@@ -8,7 +8,7 @@
 
 ## 📸 Final Product
 
-🚀 *\[<img width="1920" height="1080" alt="Demo" src="https://github.com/user-attachments/assets/e4f7bb9b-dc06-4f35-b272-4e23d060cf12" />]*
+🚀 <img width="1920" height="1080" alt="Demo" src="https://github.com/user-attachments/assets/e4f7bb9b-dc06-4f35-b272-4e23d060cf12" />
 
 ---
 
