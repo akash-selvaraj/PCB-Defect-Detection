@@ -4,14 +4,6 @@
 
 > Upload → Detect → Zoom → Filter → Explore with Ease.
 
----
-
-## 📸 Architecture
-
-🚀 <img width="1920" height="1080" alt="Demo" src="https://github.com/user-attachments/assets/e4f7bb9b-dc06-4f35-b272-4e23d060cf12" />
-
----
-
 ## 🧠 Supported Defect Classes
 
 This system detects the following defect types:
@@ -41,7 +33,7 @@ This system detects the following defect types:
 
 ## 📂 Dataset Used
 
-**Source**: [Roboflow PCB Dataset](https://universe.roboflow.com/project-5o3tr/pcb-wgcpv/dataset/1)
+**Source**: [Roboflow PCB Dataset - COCO Format](https://universe.roboflow.com/project-5o3tr/pcb-wgcpv/dataset/1)
 
 * **Total Images**: 1386
 
