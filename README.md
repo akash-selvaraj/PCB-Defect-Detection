@@ -1,36 +1,228 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 PCB Defect Detection Web Application
 
-## Getting Started
+A full-stack web application for detecting **six types of PCB defects** using a deep learning model (Detectron2). The system enables users to upload PCB images through a modern Next.js interface, which communicates with a Python backend inference service to return annotated predictions. It includes powerful features like **zoom magnification** and **light/dark mode toggle** for enhanced inspection.
 
-First, run the development server:
+---
+
+## 📌 Features
+
+* ✅ Upload and analyze PCB images
+* ✅ Automatically detect **6 defect classes**:
+
+  * `missing_hole`
+  * `mouse_bite`
+  * `open_circuit`
+  * `short`
+  * `spur`
+  * `spurious_copper`
+* ✅ Model returns annotated images highlighting the defect regions
+* 🔍 Built-in **magnifier tool** for zooming into PCB areas
+* 🌗 Toggle between **Light and Dark modes** for user comfort
+* ⚡ Fast REST API integration between frontend and backend
+
+---
+
+## 🖼️ Demo
+
+> 📽️ Add screenshots or link to a demo (e.g., deployed app or video walkthrough).
+
+---
+
+## 🏗️ System Architecture
+
+The application has two main components:
+
+### 🟦 Frontend: Next.js
+
+* Receives user image uploads
+* Sends REST API requests
+* Displays annotated images
+* Provides UI features (theme switch, magnifier)
+
+### 🟩 Backend: Python + Flask (or FastAPI)
+
+* Receives images from frontend
+* Loads a pre-trained Detectron2 model
+* Performs inference
+* Sends back predictions and image overlays
+
+![Architecture Diagram](diagram.png)
+
+---
+
+## ⚙️ Technologies Used
+
+### 🖥️ Frontend
+
+* [Next.js](https://nextjs.org/)
+* TypeScript
+* Tailwind CSS
+* PostCSS
+* ESLint
+* Inbuilt zoom tool
+* Light/Dark mode toggle
+
+### ⚙️ Backend
+
+* Python 3.7
+* Flask or FastAPI
+* Detectron2
+* PyTorch
+* YAML for model configuration
+
+---
+
+## 🛠️ System Requirements
+
+* ✅ **Linux OS is mandatory** (Detectron2 does not support Windows reliably)
+* ✅ **Python 3.7** or compatible environment
+* ⚠️ `requirements_cpu.txt` is provided but **may not work** (Detectron2 prefers CUDA-enabled environments)
+* 🧠 Pre-trained model (`model_final.pth`) must be placed in the specified location
+
+---
+
+## 🐍 Backend Setup (Inference Service)
+
+### 1. Clone the repository & enter backend directory:
+
+```bash
+cd backend/
+```
+
+### 2. Create a virtual environment and activate it:
+
+```bash
+python3.7 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install dependencies (preferably use GPU):
+
+```bash
+pip install -r requirements.txt
+```
+
+If you're on a CPU-only machine, try:
+
+```bash
+pip install -r requirements_cpu.txt  # ⚠️ May not work reliably
+```
+
+### 4. Install Detectron2:
+
+```bash
+python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+```
+
+### 5. Start the backend API service:
+
+```bash
+python app.py
+```
+
+The backend will be available at: `http://localhost:5000`
+
+---
+
+## 🌐 Frontend Setup (Next.js)
+
+### 1. Navigate to frontend folder:
+
+```bash
+cd frontend/
+```
+
+### 2. Install dependencies:
+
+```bash
+npm install
+```
+
+### 3. Run the frontend app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App will be available at: `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Directory Structure
 
-## Learn More
+```
+.
+├── backend/
+│   ├── app.py
+│   ├── model_final.pth
+│   ├── YAML Configs/
+│   ├── requirements.txt
+│   └── requirements_cpu.txt
+│
+├── frontend/
+│   ├── api.ts
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── globals.css
+│   ├── fonts/
+│   ├── next.config.ts
+│   ├── tailwind.config.ts
+│   ├── postcss.config.mjs
+│   ├── tsconfig.json
+│   ├── .eslintrc.json
+│   └── public/
+│
+├── diagram.png
+└── README.md
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Model
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **File:** `model_final.pth`
+* **Location:** `backend/`
+* **Config:** YAML files defining preprocessing and model architecture
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📡 API Endpoint
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```http
+POST /predict
+Content-Type: multipart/form-data
+```
+
+Form Data:
+
+* `file`: image file
+
+**Response**: JSON with defect predictions + annotated image
+
+```json
+{
+  "predictions": [
+    {"class": "short", "score": 0.91, "box": [34, 56, 120, 160]},
+    {"class": "spur", "score": 0.88, "box": [200, 100, 300, 180]}
+  ],
+  "image_url": "http://localhost:5000/static/annotated_image.png"
+}
+```
+
+---
+
+## ❗ Notes
+
+* If Detectron2 fails to build, ensure:
+
+  * Linux system
+  * PyTorch version matches CUDA
+  * C++ build tools installed (e.g., `build-essential` on Ubuntu)
+
+---
+
+## 📝 License
+
+This project is released under the MIT License.
+
+---
